@@ -1,13 +1,11 @@
 package com.assettracking.entity;
 
+import com.assettracking.entity.type.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CollectionId;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(
