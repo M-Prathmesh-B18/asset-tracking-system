@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class RoleController {
 
@@ -24,5 +24,15 @@ public class RoleController {
     @PostMapping("/roles")
     public ResponseEntity<String> createRole(@RequestBody RoleRequestDto roleRequestDto){
         return ResponseEntity.ok().body(roleServiceImplementation.createRole(roleRequestDto));
+    }
+
+    @GetMapping("/roles/{id}")
+    public ResponseEntity<RoleResponseDto> getRoleById(@PathVariable Long id){
+        return ResponseEntity.ok().body(roleServiceImplementation.getRoleById(id));
+    }
+
+    @PutMapping("/roles/{id}")
+    public ResponseEntity<RoleResponseDto> updatedRole(@PathVariable Long id, @RequestBody RoleRequestDto roleRequestDto){
+        return ResponseEntity.ok().body(roleServiceImplementation.updateRole(id,roleRequestDto));
     }
 }
