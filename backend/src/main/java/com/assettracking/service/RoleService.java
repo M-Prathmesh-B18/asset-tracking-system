@@ -10,7 +10,7 @@ public interface RoleService {
 
     public List<RoleResponseDto> getRole();
 
-    public String createRole(RoleRequestDto roleRequestDto);
+    public RoleResponseDto createRole(RoleRequestDto roleRequestDto);
 
     public RoleResponseDto getRoleById(Long id);
 
