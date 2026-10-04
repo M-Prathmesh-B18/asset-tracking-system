@@ -1,5 +1,6 @@
 package com.assettracking.config;
 
+import com.assettracking.dto.userDTO.UserResponseDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 

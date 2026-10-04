@@ -2,12 +2,14 @@ package com.assettracking.service;
 
 import com.assettracking.dto.roleDTO.RoleRequestDto;
 import com.assettracking.dto.roleDTO.RoleResponseDto;
+import com.assettracking.dto.userDTO.UserResponseDTO;
 import com.assettracking.entity.Role;
 import com.assettracking.exception.ResourceNotFoundException;
 import com.assettracking.exception.RoleAlreadyFoundException;
 import com.assettracking.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.management.relation.RoleNotFoundException;
@@ -30,17 +32,16 @@ public class RoleServiceImplementation implements RoleService{
     }
 
     @Override
-    public String createRole(RoleRequestDto roleRequestDto) {
+    public RoleResponseDto createRole(RoleRequestDto roleRequestDto) {
 
-        if(roleRepository.existsByRoleNameIgnoreCase(roleRequestDto.getRole_name()))
-            throw new RoleAlreadyFoundException("Role Already Exists: "+roleRequestDto.getRole_name());
+        if(roleRepository.existsByRoleNameIgnoreCase(roleRequestDto.getRoleName()))
+            throw new RoleAlreadyFoundException("Role Already Exists: "+roleRequestDto.getRoleName());
 
         Role role=modelMapper.map(roleRequestDto,Role.class);
         Role savedRole=roleRepository.save(role);
-        if(savedRole==null){
-            return "Not Created";
-        }
-        return "Role Created";
+
+
+        return modelMapper.map(savedRole,RoleResponseDto.class);
     }
 
     @Override
@@ -57,13 +58,13 @@ public class RoleServiceImplementation implements RoleService{
 
         boolean roleNameExists =
                 roleRepository.existsByRoleNameIgnoreCaseAndIdNot(
-                        roleRequestDto.getRole_name(),
+                        roleRequestDto.getRoleName(),
                         id
                 );
 
-        if(roleNameExists) throw new RoleAlreadyFoundException( "Role name already exists" + roleRequestDto.getRole_name());
+        if(roleNameExists) throw new RoleAlreadyFoundException( "Role name already exists" + roleRequestDto.getRoleName());
 
-        role.setRoleName(roleRequestDto.getRole_name());
+        role.setRoleName(roleRequestDto.getRoleName());
         role.setDescription(roleRequestDto.getDescription());
 
         Role updatedRoleName=roleRepository.save(role);

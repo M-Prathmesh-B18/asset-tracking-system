@@ -14,7 +14,7 @@ import lombok.Setter;
 public class RoleRequestDto {
     @NotBlank(message = "Role name is required")
     @Size(max = 50, message = "role name must not exceed 50 character")
-    private String role_name;
+    private String roleName;
 
     @Size(max = 255 , message="Description must not exceed 255 characters")
     private String description;
