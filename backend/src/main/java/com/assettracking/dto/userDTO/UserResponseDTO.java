@@ -21,11 +21,9 @@ public class UserResponseDTO {
 
     private String email;
 
-    private String password;
-
     private UserStatus status;
 
-    private Role role;
+    private String roleName;
 
     private LocalDateTime createdAt;
 
