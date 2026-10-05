@@ -2,6 +2,7 @@ package com.assettracking.controller;
 
 import com.assettracking.dto.userDTO.UserRequestDTO;
 import com.assettracking.dto.userDTO.UserResponseDTO;
+import com.assettracking.dto.userDTO.UserUpdateRequestDTO;
 import com.assettracking.service.UserServiceImplementation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,23 @@ public class UserController {
 
     private final UserServiceImplementation userServiceimplementation;
 
-    @PostMapping("users")
+    @PostMapping("/users")
     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
         return ResponseEntity.ok().body(userServiceimplementation.createUser(userRequestDTO));
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<List<UserResponseDTO>>getUsers(){
         return ResponseEntity.ok().body(userServiceimplementation.getUsers());
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserResponseDTO> getUserById(@Valid @PathVariable Long id){
+        return ResponseEntity.ok().body(userServiceimplementation.getUserById(id));
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserResponseDTO> updateUser(@Valid @PathVariable Long id, @RequestBody UserUpdateRequestDTO  req){
+        return ResponseEntity.ok().body(userServiceimplementation.updateUser(id,req));
     }
 }
