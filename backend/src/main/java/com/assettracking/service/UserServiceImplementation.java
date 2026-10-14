@@ -146,5 +146,23 @@ public class UserServiceImplementation implements UserService {
 
     }
 
+    @Override
+    public UserResponseDTO assignRoleToUser(Long id, String role) {
+        User user=userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User is not found : " +id));
+
+        Role role1=roleRepository.findByRoleNameIgnoreCase(role).orElseThrow(()-> new ResourceNotFoundException("Role not found : "+role));
+
+        user.setRole(role1);
+        User updatedUser=userRepository.save(user);
+
+         UserResponseDTO userResponseDTO=modelMapper.map(updatedUser,UserResponseDTO.class);
+
+         userResponseDTO.setRoleName(updatedUser.getRole().getRoleName());
+
+         return userResponseDTO;
+
+
+    }
+
 
 }

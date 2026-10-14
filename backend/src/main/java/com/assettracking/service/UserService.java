@@ -17,4 +17,6 @@ public interface UserService {
     public UserResponseDTO getUserById(Long id);
 
     public  UserResponseDTO updateUser(@Valid Long id, UserUpdateRequestDTO req);
+
+    public UserResponseDTO assignRoleToUser(Long id,String role);
 }

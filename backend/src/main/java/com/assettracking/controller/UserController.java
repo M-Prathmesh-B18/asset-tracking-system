@@ -37,4 +37,9 @@ public class UserController {
     public ResponseEntity<UserResponseDTO> updateUser(@Valid @PathVariable Long id, @RequestBody UserUpdateRequestDTO  req){
         return ResponseEntity.ok().body(userServiceimplementation.updateUser(id,req));
     }
+
+    @PatchMapping("/{id}/role")
+    public ResponseEntity<UserResponseDTO> assignRoleToUser(@Valid @PathVariable Long id, @RequestBody String role){
+        return ResponseEntity.ok().body(userServiceimplementation.assignRoleToUser(id,role));
+    }
 }
