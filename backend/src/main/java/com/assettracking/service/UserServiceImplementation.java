@@ -5,6 +5,7 @@ import com.assettracking.dto.userDTO.UserResponseDTO;
 import com.assettracking.dto.userDTO.UserUpdateRequestDTO;
 import com.assettracking.entity.Role;
 import com.assettracking.entity.User;
+import com.assettracking.entity.type.Status;
 import com.assettracking.entity.type.UserStatus;
 import com.assettracking.exception.DuplicateResourceFoundException;
 import com.assettracking.exception.ResourceNotFoundException;
@@ -162,6 +163,24 @@ public class UserServiceImplementation implements UserService {
          return userResponseDTO;
 
 
+    }
+
+    @Override
+    public UserResponseDTO changeUserStatus(Long id, String status) {
+
+        User user=userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User not found : "+id));
+
+        UserStatus status1;
+
+        try{
+            status1=UserStatus.valueOf(status.trim().toUpperCase());
+        }catch(IllegalArgumentException ex){
+            throw new IllegalArgumentException("Invalid status value . Allowed : INACTIVE, ACTIVE");
+        }
+
+        user.setStatus(status1);
+        User updatedUser=userRepository.save(user);
+        return modelMapper.map(updatedUser,UserResponseDTO.class);
     }
 
 

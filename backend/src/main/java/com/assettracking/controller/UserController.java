@@ -42,4 +42,9 @@ public class UserController {
     public ResponseEntity<UserResponseDTO> assignRoleToUser(@Valid @PathVariable Long id, @RequestBody String role){
         return ResponseEntity.ok().body(userServiceimplementation.assignRoleToUser(id,role));
     }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<UserResponseDTO> changeUserStatus(@Valid @PathVariable Long id , @RequestBody String status){
+        return ResponseEntity.ok().body(userServiceimplementation.changeUserRole(id,status));
+    }
 }
