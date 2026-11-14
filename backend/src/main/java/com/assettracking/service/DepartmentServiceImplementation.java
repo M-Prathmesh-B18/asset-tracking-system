@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DepartmentServiceImplementation implements DepartmentService {
@@ -26,5 +28,12 @@ public class DepartmentServiceImplementation implements DepartmentService {
          Department savedDept=departmentRepository.save(newDept);
 
         return modelMapper.map(savedDept, DepartmentResponseDTO.class);
+    }
+
+    @Override
+    public List<DepartmentResponseDTO> getAllDepartment() {
+        List<Department> deptList=departmentRepository.findAll();
+
+        return deptList.stream().map(dept-> modelMapper.map(dept, DepartmentResponseDTO.class)).toList();
     }
 }
