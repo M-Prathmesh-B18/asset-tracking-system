@@ -15,4 +15,6 @@ public interface DepartmentService {
     public List<DepartmentResponseDTO> getAllDepartment();
 
     public DepartmentResponseDTO getDepartmentById(@Valid Long id);
+
+    public DepartmentResponseDTO getDepartmentByName(@Valid String deptName);
 }

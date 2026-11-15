@@ -45,4 +45,12 @@ public class DepartmentServiceImplementation implements DepartmentService {
 
         return modelMapper.map(dept, DepartmentResponseDTO.class) ;
     }
+
+    @Override
+    public DepartmentResponseDTO getDepartmentByName(String deptName) {
+
+        Department dept=departmentRepository.findByDepartmentNameIgnoreCase(deptName).orElseThrow(()-> new ResourceNotFoundException("Department not found by this name : "+deptName));
+        return  modelMapper.map(dept,DepartmentResponseDTO.class);
+    }
+
 }

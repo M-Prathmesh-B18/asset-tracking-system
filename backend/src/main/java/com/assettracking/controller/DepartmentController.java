@@ -30,4 +30,9 @@ public class DepartmentController {
     public ResponseEntity<DepartmentResponseDTO> getDepartmentById(@Valid @PathVariable Long id){
         return ResponseEntity.ok().body(departmentService.getDepartmentById(id));
     }
+
+    @GetMapping("/departments/{deptName}")
+    public ResponseEntity<DepartmentResponseDTO> getDepartmentByName(@Valid @PathVariable String deptName){
+        return ResponseEntity.ok().body(departmentService.getDepartmentByName(deptName));
+    }
 }
