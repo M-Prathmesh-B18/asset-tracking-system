@@ -16,13 +16,18 @@ import java.util.List;
 public class DepartmentController {
     private final DepartmentService departmentService;
 
-    @PostMapping("/department")
+    @PostMapping("/departments")
     public ResponseEntity<DepartmentResponseDTO> createDepartment(@Valid @RequestBody DepartmentRequestDTO departmentRequestDTO){
          return ResponseEntity.ok().body(departmentService.createDepartment(departmentRequestDTO));
     }
 
-    @GetMapping("/department")
+    @GetMapping("/departments")
     public ResponseEntity<List<DepartmentResponseDTO>> getAllDepartment(){
         return ResponseEntity.ok().body(departmentService.getAllDepartment());
+    }
+
+    @GetMapping("/departments/{id}")
+    public ResponseEntity<DepartmentResponseDTO> getDepartmentById(@Valid @PathVariable Long id){
+        return ResponseEntity.ok().body(departmentService.getDepartmentById(id));
     }
 }
