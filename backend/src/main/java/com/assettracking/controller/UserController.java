@@ -38,12 +38,12 @@ public class UserController {
         return ResponseEntity.ok().body(userService.updateUser(id,req));
     }
 
-    @PatchMapping("/{id}/role")
+    @PatchMapping("/users/{id}/role")
     public ResponseEntity<UserResponseDTO> assignRoleToUser(@Valid @PathVariable Long id, @RequestBody String role){
         return ResponseEntity.ok().body(userService.assignRoleToUser(id,role));
     }
 
-    @PatchMapping("/{id}/status")
+    @PatchMapping("/users/{id}/status")
     public ResponseEntity<UserResponseDTO> changeUserStatus(@Valid @PathVariable Long id , @RequestBody String status){
         return ResponseEntity.ok().body(userService.changeUserStatus(id,status));
     }

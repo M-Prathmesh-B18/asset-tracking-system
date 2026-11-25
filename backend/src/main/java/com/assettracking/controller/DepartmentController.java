@@ -2,6 +2,7 @@ package com.assettracking.controller;
 
 import com.assettracking.dto.departmentDTO.DepartmentRequestDTO;
 import com.assettracking.dto.departmentDTO.DepartmentResponseDTO;
+import com.assettracking.dto.departmentDTO.DepartmentUpdateStatusDTO;
 import com.assettracking.service.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,17 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public ResponseEntity<DepartmentResponseDTO> getDepartmentById(@Valid @PathVariable Long id){
+    public ResponseEntity<DepartmentResponseDTO> getDepartmentById(@PathVariable Long id){
         return ResponseEntity.ok().body(departmentService.getDepartmentById(id));
     }
 
-    @GetMapping("/departments/{deptName}")
-    public ResponseEntity<DepartmentResponseDTO> getDepartmentByName(@Valid @PathVariable String deptName){
+    @GetMapping("/departments/name/{deptName}")
+    public ResponseEntity<DepartmentResponseDTO> getDepartmentByName( @PathVariable String deptName){
         return ResponseEntity.ok().body(departmentService.getDepartmentByName(deptName));
+    }
+
+    @PatchMapping("/departments/{id}/status")
+    public ResponseEntity<DepartmentResponseDTO> changeDepartmentStatus(@PathVariable Long id, @Valid  @RequestBody DepartmentUpdateStatusDTO status){
+            return  ResponseEntity.ok().body(departmentService.changeDepartmentStatus(id,status));
     }
 }
